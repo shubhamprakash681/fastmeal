@@ -1,0 +1,117 @@
+@import "app";
+
+.add-item-container {
+  padding: 20px;
+  background-color: white;
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.add-it-tit {
+  color: black;
+  text-align: center;
+}
+
+#add-item-form {
+  background-color: white;
+  margin-top: 30px;
+  padding: 12px;
+}
+
+.hor-form-el {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 30px 0;
+  overflow-x: auto;
+  font-size: larger;
+
+  > label {
+    color: black;
+    font-weight: bolder;
+  }
+
+  > input,
+  select,
+  ul {
+    padding: 7px;
+    outline-color: $primary-color;
+    border-radius: 3px;
+    box-sizing: border-box;
+    width: 80%;
+  }
+}
+
+#hor-for-sel-cont {
+  > label {
+    color: black;
+    font-weight: bolder;
+    font-size: larger;
+  }
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 30px 0;
+}
+
+#city_code,
+#category {
+  width: 80%;
+}
+
+#stock-list-cont {
+  padding: 0;
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  border: 2px solid black;
+
+  > li {
+    width: 100%;
+    padding: 2px 12px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    overflow-x: auto;
+    justify-content: space-between;
+
+    > label {
+      font-size: medium;
+    }
+
+    > input {
+      padding: 2px 12px;
+      width: 70%;
+      outline-color: $primary-color;
+    }
+  }
+}
+
+.add-item-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+@media screen and (min-width: 1080px) {
+  .hor-form-el > input,
+  #stock-list-cont,
+  select,
+  #city_code,
+  #category {
+    width: 85%;
+  }
+
+  #add-item-form {
+    width: 900px;
+    margin: auto;
+    border-radius: 10px;
+    padding: 60px;
+  }
+}

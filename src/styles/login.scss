@@ -1,0 +1,130 @@
+@import "app";
+
+.login-page-container {
+  background-color: $main-bgn-col;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: space-around;
+  overflow: auto;
+}
+
+.login-box {
+  background-color: white;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 12px;
+  font-size: small;
+
+  > h2 {
+    color: black;
+  }
+}
+
+.login-form {
+  margin: 0 0 20px 0px;
+
+  > div {
+    margin: 10px 0;
+  }
+
+  > div > label {
+    color: black;
+  }
+  > div > input {
+    padding: 7px;
+    font-size: larger;
+    outline-color: $primary-color;
+  }
+}
+.pswd-field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid rgba(82, 82, 82, 0.822);
+  border-radius: 2px;
+  outline-color: $primary-color;
+  width: 100%;
+  box-sizing: border-box;
+  > input {
+    padding: 7px;
+    font-size: larger;
+    border: none;
+    width: 258px;
+    outline-color: $primary-color;
+  }
+}
+.vis-icon {
+    display: flex;
+    align-items: center;
+    padding: 6px;
+    cursor: pointer;
+}
+
+#login-btn {
+  width: 100%;
+  padding: 5px;
+  margin: 5px 0;
+  border-radius: 4px;
+}
+.fgt-psk {
+  margin: 0 0 10px 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.separator {
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.separator::before,
+.separator::after {
+  content: "----------";
+  flex: 1;
+}
+
+.separator:not(:empty)::before {
+  margin-right: 0.25em;
+}
+
+.separator:not(:empty)::after {
+  margin-left: 0.25em;
+}
+
+.logo-out {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-around;
+  border: 2px solid $primary-color;
+  border-radius: 20px;
+  padding: 2px;
+  cursor: pointer;
+  font-size: 23px;
+  margin: 10px 7px;
+}
+
+.sup-div {
+  margin-top: 20px;
+}
+
+#p-reco-header {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+#p-bck {
+  margin-right: 38px;
+  cursor: pointer;
+  display: flex;
+}

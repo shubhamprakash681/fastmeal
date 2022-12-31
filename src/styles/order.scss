@@ -1,0 +1,21 @@
+.order-container {
+  width: 100%;
+  height: 100%;
+  padding: 7px;
+  box-sizing: border-box;
+//   overflow-y: auto;
+}
+
+.order-bot {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  margin-top: 50px;
+
+  > span {
+    color: rgb(4, 196, 4);
+    font-size: larger;
+    font-weight: bold;
+  }
+}

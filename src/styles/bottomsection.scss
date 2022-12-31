@@ -1,0 +1,64 @@
+@import "app";
+
+.filter-container {
+  display: flex;
+  justify-content: center;
+  overflow-x: auto;
+
+  > * {
+    flex-shrink: 0;
+  }
+}
+
+.filter-inner-cont {
+  padding: 10px 0px;
+  display: flex;
+  justify-content: space-between;
+  > button {
+    display: flex;
+    padding: 0;
+    margin: 0 10px;
+    border: none;
+  }
+}
+
+.f-card-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 100px;
+  width: 100px;
+  background-color: rgba($bgn-color, 0.5);
+  cursor: pointer;
+  border-radius: 10px;
+
+  > img {
+    width: 40px;
+  }
+}
+.f-card-container:hover {
+  transform: scale(1.06);
+}
+
+.bottom-item-container {
+  padding: 60px 20px;
+  display: grid;
+  gap: 50px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  justify-items: center;
+  align-items: center;
+  min-height: 200px;
+}
+
+@media screen and (max-width: 778px) {
+  .filter-container {
+    justify-content: flex-start;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .bottom-item-container {
+    overflow-x: auto;
+  }
+}

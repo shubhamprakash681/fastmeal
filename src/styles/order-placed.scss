@@ -1,0 +1,37 @@
+@import "app";
+
+.order-placed-container {
+  padding: 12px;
+  > div {
+    margin-top: 30px;
+  }
+
+  > h2 {
+    text-align: center;
+    color: rgb(4, 196, 4);
+  }
+}
+
+.order-det {
+  height: 500px;
+  > h3 {
+    padding: 5px 0;
+  }
+}
+.order-det-ord {
+  height: 94%;
+  background-color: white;
+  border: 1px solid $secondary-color;
+  border-radius: 7px;
+}
+
+.rec-msg {
+  text-align: center;
+  font-size: larger;
+}
+
+.deliv-track-box {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}

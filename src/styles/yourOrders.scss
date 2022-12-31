@@ -1,0 +1,19 @@
+@import "app";
+
+.your-orders-container {
+  padding: 12px;
+  height: calc(100vh - 88px);
+  box-sizing: border-box;
+
+  overflow-y: auto;
+}
+
+.each-order-wrapper {
+  border: 1px solid $secondary-color;
+  border-radius: 7px;
+  background-color: white;
+  margin-bottom: 40px;
+  height: auto;
+  overflow-y: auto;
+  overflow-x: auto;
+}

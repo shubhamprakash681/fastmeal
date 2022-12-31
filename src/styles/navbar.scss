@@ -1,0 +1,140 @@
+@import url("https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap");
+@import "app";
+
+.navbar-container {
+  padding: 12px 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 9;
+}
+
+.nav-left {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+
+  > h1 {
+    font-family: "Alex Brush", cursive;
+    font-size: 50px;
+    cursor: pointer;
+  }
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.nav-right-item {
+  padding: 10px;
+  text-decoration: none;
+  margin: 0 10px;
+  cursor: pointer;
+  font-size: larger;
+}
+
+.nav-right-item:hover {
+  color: rgb(155, 16, 219);
+}
+
+.cart {
+  display: flex;
+  cursor: pointer;
+}
+.cart-l {
+  margin-right: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cart-number {
+  border-radius: 500px;
+  font-size: 15px;
+  text-align: start;
+}
+
+.nav-avtar {
+  margin: 0 10px;
+  cursor: pointer;
+  border: 2px solid rgb(223, 14, 98);
+  box-shadow: 0px 2px 13px #88888888;
+}
+
+.nav-avtar:hover {
+  border: 2px solid rgb(155, 16, 219);
+}
+
+.hbg-menu {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.dropdown {
+  width: 200px;
+  max-height: calc(100vh - 100px);
+  position: fixed;
+  right: 0px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  background-color: white;
+  align-items: flex-end;
+  box-shadow: 0px 2px 13px #88888888;
+  z-index: 10;
+}
+
+@media screen and (max-width: 900px) {
+  // for small screen
+  .nav-right {
+    display: none;
+  }
+
+  .cart {
+    justify-content: space-between;
+  }
+
+  .cart-l {
+    display: flex;
+  }
+
+  .nav-right-item:hover {
+    color: rgb(155, 16, 219);
+  }
+
+  .cart-r {
+    border-radius: 50%;
+    border: 2px solid rgb(223, 14, 98);
+  }
+  .cart-r:hover {
+    border: 2px solid rgb(155, 16, 219);
+  }
+  .nav-right-item {
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  // for big screen
+  .hbg-menu {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  // for very small screen
+  .nav-left {
+    > h1 {
+      font-size: 30px;
+    }
+  }
+}

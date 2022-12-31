@@ -1,0 +1,111 @@
+@import "app";
+
+.banner-container {
+  display: flex;
+  box-sizing: border-box;
+}
+
+.banner-div1 {
+  display: flex;
+  flex-direction: column;
+
+  > p {
+    font-size: 90px;
+    color: black;
+  }
+
+  > h2 {
+    font-size: xx-large;
+    margin: 30px 0px;
+  }
+}
+
+.banner-div2 {
+  background-image: linear-gradient(
+    to bottom left,
+    rgba($bgn-color, 0.9),
+    white
+  );
+  background-size: 50% 100%;
+  background-position-x: right;
+  background-repeat: no-repeat;
+  display: grid;
+  gap: 50px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+.banner-div1,
+.banner-div2 {
+  box-sizing: border-box;
+}
+
+.banner-div1 {
+  padding: 20px;
+}
+
+@media screen and (min-width: 900px) {
+  // for bigger display
+  .banner-div1,
+  .banner-div2 {
+    width: 50%;
+  }
+
+  .banner-div2 {
+    padding: 80px 130px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  // for smaller display
+  .banner-container {
+    flex-direction: column;
+  }
+
+  .banner-div1,
+  .banner-div2 {
+    width: 100%;
+  }
+
+  .banner-div2 {
+    padding: 80px 20px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  // for very small display
+  .banner-div1 {
+    > p {
+      font-size: 40px;
+      color: black;
+    }
+  }
+}
+
+.banner-card-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  color: black;
+  height: 250px;
+  border-radius: 20px;
+  background-color: rgba(179, 31, 31, 0.356);
+
+  > img {
+    width: 160px;
+    margin-top: -50px;
+    margin-bottom: 18px;
+  }
+
+  > h3,
+  h4 {
+    padding: 5px 0;
+    color: black;
+    font-weight: 100;
+  }
+}
+@media screen and (max-width: 350px) {
+  .banner-div2 {
+    overflow-y: auto;
+  }
+}

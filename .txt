@@ -1,0 +1,30 @@
+user: {
+  uid,
+  role: admin/customer,
+  joiningDate,
+  profile: {
+    name, avtaar, gender, address: {
+      cityCode
+    }
+  }
+  cart,
+  wishlist
+  lastLogin
+}
+
+item: {
+  title,
+  image,
+  cityCode
+  category,
+  price,
+  calories,
+  stock: {[city:number]},
+  timeStamp
+}
+
+categories: []
+
+UID, role, joinind date, last login, profile, CART, widhlist
+
+image, title, category, price, calCount, addedon

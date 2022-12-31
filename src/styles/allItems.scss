@@ -1,0 +1,95 @@
+@import "app";
+
+.allitems-container {
+  padding: 30px;
+  box-sizing: border-box;
+  width: 100%;
+  height: calc(100vh - 86px);
+  background-color: white;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.it-cont {
+  padding: 7px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0px 0px 2px #88888888;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 7px 0;
+  border-radius: 7px;
+  background-color: white;
+  overflow: auto;
+
+  > div {
+    display: flex;
+    align-items: center;
+  }
+  > div > img {
+    width: 60px;
+    border: 1px solid $primary-color;
+    height: 60px;
+    border-radius: 4px;
+  }
+}
+.it-cont:hover {
+  box-shadow: 0px 0px 6px #88888888;
+  transform: scale(1.001);
+}
+
+.it-cont-l-detail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  > div {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+  }
+  > div > span {
+    padding-left: 7px;
+  }
+}
+
+.it-btn-cont {
+  width: 118px;
+  justify-content: space-between;
+}
+
+.item-btn {
+  padding: 7px 10px;
+  background-color: $primary-color;
+  color: rgb(255, 255, 255);
+  width: fit-content;
+  border: none;
+  cursor: pointer;
+  font-size: x-small;
+  font-weight: bolder;
+  border-radius: 7px;
+}
+.item-btn:hover {
+  box-shadow: 0px 2px 15px #88888888;
+}
+
+@media screen and (max-width: 1080px) {
+  .it-cont,
+  .item-btn {
+    font-size: x-small;
+  }
+}
+@media screen and (max-width: 780px) {
+  .it-cont,
+  .item-btn {
+    font-size: xx-small;
+  }
+  .it-btn-cont {
+    width: 108px;
+  }
+}
