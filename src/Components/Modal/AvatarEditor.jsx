@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 import { updateUserDataInDb } from "../../actions/customerActions";
 import { getCloudImgURI } from "../../utils/cloudinary";
 
@@ -18,7 +19,7 @@ const AvatarEditor = ({ setOpenAvtarEditor = true }) => {
     if (imgCloudinaryURI.asset_id) {
       // uploaded to cloudinary successfully
 
-      console.log("hjf, cud: ", currentUserData);
+      // console.log("hjf, cud: ", currentUserData);
       let modData = JSON.parse(JSON.stringify(currentUserData));
       modData.profile.avtar = imgCloudinaryURI.secure_url;
 
@@ -30,6 +31,7 @@ const AvatarEditor = ({ setOpenAvtarEditor = true }) => {
       setOpenAvtarEditor(false);
 
       console.log("Profile pic updated successfully");
+      toast.success("Profile pic updated successfully");
     }
   }, [imgCloudinaryURI]);
 

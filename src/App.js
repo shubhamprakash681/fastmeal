@@ -28,6 +28,8 @@ import {
 import OrderPlaced from "./Components/pages/OrderPlaced";
 import TrackDelivery from "./Components/pages/TrackDelivery";
 import YourOrders from "./Components/pages/YourOrders";
+import AboutUs from "./Components/pages/AboutUs";
+import PlaceOrder from "./Components/pages/PlaceOrder";
 
 function App() {
   const dispatch = useDispatch();
@@ -102,7 +104,7 @@ function App() {
 
   return (
     <>
-      {console.log("user: ", user)}
+      {/* {console.log("user: ", user)} */}
 
       <Routes>
         {/* authenticated ? (yes) : (no) */}
@@ -138,6 +140,16 @@ function App() {
             />
 
             <Route
+              path="/place-order"
+              element={
+                <>
+                  <NavBar isAdmin={isAdmin} />
+                  <PlaceOrder />
+                </>
+              }
+            />
+
+            <Route
               path="/order-placed"
               element={
                 <>
@@ -153,6 +165,16 @@ function App() {
                 <>
                   <NavBar isAdmin={isAdmin} />
                   <TrackDelivery />
+                </>
+              }
+            />
+
+            <Route
+              path="/about"
+              element={
+                <>
+                  <NavBar isAdmin={isAdmin} />
+                  <AboutUs />
                 </>
               }
             />

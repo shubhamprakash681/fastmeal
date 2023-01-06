@@ -1,15 +1,38 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { logoutHandler } from "../../firebase/logoutHandler";
 import "../../styles/modal.scss";
 
-const AvatarMenu = ({ isAdmin = false }) => {
+const AvatarMenu = ({ isAdmin = false, setProfile }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const avatarModalRef = useRef();
+
+  useEffect(() => {
+    const avatarMenuMouseDownHandler = (e) => {
+      if (avatarModalRef.current) {
+        if (!avatarModalRef.current.contains(e.target)) {
+          if (setProfile) {
+            setProfile(false);
+          }
+        }
+      }
+    };
+    document.addEventListener("mousedown", avatarMenuMouseDownHandler);
+  });
+
   return (
     <>
-      <div className="avatar-modal-container">
+      <div
+        ref={avatarModalRef}
+        className="avatar-modal-container"
+        onClick={() => {
+          if (setProfile) {
+            setProfile(false);
+          }
+        }}
+      >
         <div>
           <Link className="avt-modal-opt-link-div" to={"/profile"}>
             Update Profile

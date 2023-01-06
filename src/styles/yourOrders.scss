@@ -16,4 +16,9 @@
   height: auto;
   overflow-y: auto;
   overflow-x: auto;
+
+  > div {
+    padding: 4px 12px;
+    color: $secondary-color;
+  }
 }

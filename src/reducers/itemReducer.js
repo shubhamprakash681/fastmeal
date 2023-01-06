@@ -20,6 +20,7 @@ const initialState = {
   allCityOptions: [],
   allSatesOptions: [],
   allProducts: [],
+  editItemData: null,
 };
 
 const itemReducer = createReducer(initialState, {
@@ -36,6 +37,27 @@ const itemReducer = createReducer(initialState, {
   },
   FETCH_ALL_PRODUCTS: (state, actions) => {
     state.allProducts = actions.payload;
+  },
+
+  ADD_FOOD: (state, actions) => {
+    if (actions.payload[1] === true) {
+      // updating food
+      let newAllProd = [];
+      state.allProducts.forEach((item, index) => {
+        if (item.image.asset_id !== actions.payload[0].image.asset_id) {
+          newAllProd.push(item);
+        }
+      });
+
+      state.allProducts = [...newAllProd, actions.payload[0]];
+    } else {
+      // adding new food
+      state.allProducts = [...state.allProducts, actions.payload[0]];
+    }
+  },
+
+  UPDATE_EDIT_ITEM_DATA: (state, actions) => {
+    state.editItemData = actions.payload;
   },
 });
 

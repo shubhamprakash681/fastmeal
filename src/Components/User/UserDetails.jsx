@@ -9,8 +9,6 @@ const UserDetails = ({ user, setOpenserDetail }) => {
 
   return (
     <>
-      {console.log("scklj, usr:", user)}
-
       <div className="us-detail-container">
         <div className="us-contents">
           <div className="us-content-header">

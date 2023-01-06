@@ -65,9 +65,9 @@ const SignupPage = () => {
                   }}
                 >
                   {showPassword ? (
-                    <VisibilityOutlinedIcon />
-                  ) : (
                     <VisibilityOffOutlinedIcon />
+                  ) : (
+                    <VisibilityOutlinedIcon />
                   )}
                 </div>
               </div>

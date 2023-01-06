@@ -7,69 +7,11 @@ import {
   getFirestore,
   setDoc,
 } from "firebase/firestore";
+import { toast } from "react-toastify";
 import { firebaseApp } from "../firebase/firebase";
 import { currentTimeGenerator } from "../utils/dayjs";
 
 const db = getFirestore(firebaseApp);
-
-export const testAdd = async () => {
-  const citiesRef = collection(db, "cities");
-
-  await setDoc(doc(citiesRef, "SF"), {
-    name: "San Francisco",
-    state: "CA",
-    country: "USA",
-    capital: false,
-    population: 860000,
-    regions: ["west_coast", "norcal"],
-  });
-  await setDoc(doc(citiesRef, "LA"), {
-    name: "Los Angeles",
-    state: "CA",
-    country: "USA",
-    capital: false,
-    population: 3900000,
-    regions: ["west_coast", "socal"],
-  });
-  await setDoc(doc(citiesRef, "DC"), {
-    name: "Washington, D.C.",
-    state: null,
-    country: "USA",
-    capital: true,
-    population: 680000,
-    regions: ["east_coast"],
-  });
-  await setDoc(doc(citiesRef, "TOK"), {
-    name: "Tokyo",
-    state: null,
-    country: "Japan",
-    capital: true,
-    population: 9000000,
-    regions: ["kanto", "honshu"],
-  });
-  await setDoc(doc(citiesRef, "BJ"), {
-    name: "Beijing",
-    state: null,
-    country: "China",
-    capital: true,
-    population: 21500000,
-    regions: ["jingjinji", "hebei"],
-  });
-
-  console.log("TEst uploaded");
-};
-
-export const testRead = async () => {
-  const docRef = doc(db, "cities", "jku");
-  const docSnap = await getDoc(docRef);
-
-  if (docSnap.exists()) {
-    console.log("Document data:", docSnap.data());
-  } else {
-    // doc.data() will be undefined in this case
-    console.log("No such document!");
-  }
-};
 
 export const fetchCurrentUserDataFromDB = (user) => async (dispatch) => {
   const docRef = doc(db, "users", user.uid);
@@ -77,7 +19,7 @@ export const fetchCurrentUserDataFromDB = (user) => async (dispatch) => {
 
   if (docSnap.exists()) {
     let userData = docSnap.data();
-    console.log("Users Document data:", userData);
+    // console.log("Users Document data:", userData);
 
     userData.lastLogin = currentTimeGenerator();
 
@@ -86,7 +28,13 @@ export const fetchCurrentUserDataFromDB = (user) => async (dispatch) => {
     try {
       await setDoc(doc(usersRef, user.uid), userData);
       console.log("USER MODIFIED SUCCESSFULY");
+      toast.success("Login Successful", {
+        toastId: "user-mod",
+      });
     } catch (err) {
+      toast.error(err, {
+        toastId: "usr-update-err",
+      });
       console.log(err);
     }
 
@@ -100,7 +48,7 @@ export const fetchCurrentUserDataFromDB = (user) => async (dispatch) => {
 
     const usersRef = collection(db, "users");
 
-    console.log("here, user is:", user);
+    // console.log("here, user is:", user);
 
     const newDocObj = {
       uid: user.uid,
@@ -118,24 +66,31 @@ export const fetchCurrentUserDataFromDB = (user) => async (dispatch) => {
       orders: [],
       wishlist: [],
       lastLogin: currentTimeGenerator(),
+      previousDeliveryLocations: [],
     };
 
     try {
       await setDoc(doc(usersRef, user.uid), newDocObj);
       console.log("USER CREATED SUCCESSFULY");
+      toast.success("User Account Created", {
+        toastId: "user-created",
+      });
 
       dispatch({
         type: "GET_CURRENT_USER_DATA",
         payload: newDocObj,
       });
     } catch (err) {
+      toast.error(err, {
+        toastId: err,
+      });
       console.log(err);
     }
   }
 };
 
 export const updateUserDataInDb = (user, updatedUser) => async (dispatch) => {
-  console.log("executing here");
+  // console.log("executing here");
   const docRef = doc(db, "users", user.uid);
   const docSnap = await getDoc(docRef);
 

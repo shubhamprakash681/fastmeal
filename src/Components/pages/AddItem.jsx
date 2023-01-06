@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import "../../styles/addItems.scss";
 import ReactSelect from "react-select";
@@ -7,75 +7,67 @@ import { getCloudImgURI } from "../../utils/cloudinary";
 import { addFoodToDb } from "../../actions/adminActions";
 
 const AddItem = () => {
-  const [title, setTitle] = useState("");
-  const [image, setImage] = useState("");
-  const [imageCloudURI, setImageCloudURI] = useState("");
-  const [selectedCity, setSelectedCity] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState("");
-  const [price, setPrice] = useState("");
-  const [calorieCount, setCalorieCount] = useState("");
-  const [stock, setStock] = useState([]);
-
+  const dispatch = useDispatch();
   const allCategories = useSelector((state) => state.itemReducer.categories);
   const allCityList = useSelector((state) => state.itemReducer.allCityOptions);
+  const editItemData = useSelector((state) => state.itemReducer.editItemData);
+
+  const [title, setTitle] = useState(editItemData ? editItemData.title : "");
+  const [image, setImage] = useState("");
+  const [imageCloudURI, setImageCloudURI] = useState(
+    editItemData ? editItemData.image : ""
+  );
+  const [selectedCity, setSelectedCity] = useState(
+    editItemData ? editItemData.selectedCity : []
+  );
+  const [selectedCategory, setSelectedCategory] = useState(
+    editItemData ? editItemData.selectedCategory : ""
+  );
+  const [price, setPrice] = useState(editItemData ? editItemData.price : "");
+  const [calorieCount, setCalorieCount] = useState(
+    editItemData ? editItemData.calorieCount : ""
+  );
 
   const handleStockChange = (index) => (e) => {
-    const linSearch = (arr = [], cityCode) => {
-      for (let i = 0; i < arr.length; i++) {
-        if (arr[i].cityCode === cityCode) {
-          return i;
-        }
-      }
+    // console.log("index: ", index, ", e: ", e.target.value);
 
-      return -1;
+    let currCity = JSON.parse(JSON.stringify(selectedCity));
+    currCity[index] = {
+      label: currCity[index].label,
+      value: currCity[index].value,
+      itemStock: Number(e.target.value),
     };
-
-    let currStockData = stock;
-    let presentAt = linSearch(currStockData, selectedCity[index].value);
-    if (presentAt === -1) {
-      currStockData.push({
-        cityCode: selectedCity[index].value,
-        stockCount: e.target.value,
-      });
-    } else {
-      currStockData[presentAt] = {
-        cityCode: selectedCity[index].value,
-        stockCount: e.target.value,
-      };
-    }
-
-    setStock(currStockData);
-
-    // console.log("stock", stock);
+    setSelectedCity(currCity);
   };
 
   useEffect(() => {
     // console.log("here, imageCloudURI: ", imageCloudURI);
-
     if (imageCloudURI.asset_id) {
-      try {
-        addFoodToDb(
-          title,
-          imageCloudURI,
-          calorieCount,
-          price,
-          selectedCategory,
-          selectedCity,
-          stock
-        );
-        console.log("Added successfully");
+      if (!editItemData) {
+        try {
+          dispatch(
+            addFoodToDb(
+              title,
+              imageCloudURI,
+              calorieCount,
+              price,
+              selectedCategory,
+              selectedCity
+            )
+          );
 
-        setTitle("");
-        setImage("");
-        setCalorieCount("");
-        setImageCloudURI("");
-        setPrice("");
-        setSelectedCategory([]);
-        setSelectedCity([]);
-        setStock([]);
-      } catch (err) {
-        console.log(err);
-        alert(err);
+          setTitle("");
+          setImage("");
+          setCalorieCount("");
+          setImageCloudURI("");
+          setPrice("");
+          setSelectedCategory("");
+          setSelectedCity([]);
+          // setStock([]);
+        } catch (err) {
+          console.log(err);
+          alert(err);
+        }
       }
     }
   }, [imageCloudURI]);
@@ -83,20 +75,56 @@ const AddItem = () => {
   const formSubmissionHandler = async (e) => {
     e.preventDefault();
 
-    getCloudImgURI(image, 1080).then((res) => {
-      //   console.log("fetchedData: ", res);
+    if (editItemData) {
+      try {
+        dispatch(
+          addFoodToDb(
+            title,
+            imageCloudURI,
+            calorieCount,
+            price,
+            selectedCategory,
+            selectedCity,
+            true
+          )
+        );
 
-      setImageCloudURI({
-        asset_id: res.data.asset_id,
-        secure_url: res.data.secure_url,
+        setTitle("");
+        setImage("");
+        setCalorieCount("");
+        setImageCloudURI("");
+        setPrice("");
+        setSelectedCategory("");
+        setSelectedCity([]);
+        // setStock([]);
+      } catch (err) {
+        console.log(err);
+        alert(err);
+      }
+    } else {
+      getCloudImgURI(image, 1080).then((res) => {
+        //   console.log("fetchedData: ", res);
+
+        setImageCloudURI({
+          asset_id: res.data.asset_id,
+          secure_url: res.data.secure_url,
+        });
       });
-    });
+    }
   };
 
   return (
     <>
       <div className="add-item-container">
-        <h2 className="add-it-tit">Add A Food</h2>
+        {editItemData ? (
+          <>
+            <h2 className="add-it-tit">Edit Food</h2>
+          </>
+        ) : (
+          <>
+            <h2 className="add-it-tit">Add A Food</h2>
+          </>
+        )}
         <form id="add-item-form" onSubmit={formSubmissionHandler}>
           <div className="hor-form-el">
             <label htmlFor="title">Food Title:</label>
@@ -113,16 +141,18 @@ const AddItem = () => {
             />
           </div>
 
-          <div className="hor-form-el">
-            <label htmlFor="img">Food Image:</label>
-            <input
-              required
-              type="file"
-              name="img"
-              id="img"
-              onChange={(e) => setImage(e.target.files[0])}
-            />
-          </div>
+          {!editItemData && (
+            <div className="hor-form-el">
+              <label htmlFor="img">Food Image:</label>
+              <input
+                required
+                type="file"
+                name="img"
+                id="img"
+                onChange={(e) => setImage(e.target.files[0])}
+              />
+            </div>
+          )}
 
           <div className="hor-form-el">
             <label htmlFor="calCount">Calories:</label>
@@ -201,6 +231,7 @@ const AddItem = () => {
                       <li key={index}>
                         <label htmlFor="stick-inp">{item.label}:</label>
                         <input
+                          defaultValue={item.itemStock ? item.itemStock : null}
                           required
                           id="stockinp"
                           type="number"

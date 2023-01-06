@@ -74,7 +74,7 @@ const ItemCard = ({ item }) => {
               </>
             )}
           </div>
-          <h3>{title}</h3>
+          <h3 className="it-title">{title}</h3>
           <h4>{calCount} Calories</h4>
           <h2>Rs. {price}</h2>
         </div>

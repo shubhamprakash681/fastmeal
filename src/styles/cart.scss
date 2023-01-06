@@ -29,16 +29,16 @@
   justify-content: space-between;
   width: 90px;
   padding: 7px 10px;
-  background-color: rgba(180, 180, 180, 0.144);
+  background-color: rgba($primary-color, 0.09);
   border: none;
   border-radius: 4px;
+  border: 1px solid $primary-color;
   font-weight: bold;
-  box-shadow: 0px 2px 5px #88888888;
   cursor: pointer;
 }
 
 .cart-btn:hover {
-  box-shadow: 0px 2px 10px #88888888;
+  box-shadow: 0px 0px 3px #88888888;
 }
 
 .empty-cart-container {

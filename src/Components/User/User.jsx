@@ -44,7 +44,7 @@ const User = ({ allUsers, userData }) => {
           <div className="us-role">{userData.role}</div>
         </div>
 
-        <div className="us-btn">
+        {/* <div className="us-btn"> */}
           {userData.role === "admin" ? (
             <button
               onClick={(e) => {
@@ -66,7 +66,7 @@ const User = ({ allUsers, userData }) => {
               Make Admin
             </button>
           )}
-        </div>
+        {/* </div> */}
       </div>
 
       {openUserDetail && (

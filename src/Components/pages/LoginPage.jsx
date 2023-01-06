@@ -70,9 +70,9 @@ const LoginPage = () => {
                   }}
                 >
                   {showPassword ? (
-                    <VisibilityOutlinedIcon />
-                  ) : (
                     <VisibilityOffOutlinedIcon />
+                  ) : (
+                    <VisibilityOutlinedIcon />
                   )}
                 </div>
               </div>

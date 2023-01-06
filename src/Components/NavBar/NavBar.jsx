@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import LocalMallOutlinedIcon from "@mui/icons-material/LocalMallOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
@@ -11,6 +11,7 @@ import AvatarMenu from "../Modal/AvatarMenu";
 import Cart from "../Cart/Cart";
 
 const NavBar = ({ isAdmin = false }) => {
+  const dropdownRef = useRef();
   const windowSize = useSelector((state) => state.windowReducer);
   const currentUserData = useSelector(
     (state) => state.userReducer.currentUserData
@@ -34,9 +35,16 @@ const NavBar = ({ isAdmin = false }) => {
     }
   }, [currentUserData]);
 
-  // console.log(windowSize);
-  // console.log('menuON: ', menuON);
-  // console.log('profile: ', profile);
+  useEffect(() => {
+    const dropdownMouseDownHandler = (e) => {
+      if (dropdownRef.current) {
+        if (!dropdownRef.current.contains(e.target)) {
+          setMenuON(false);
+        }
+      }
+    };
+    document.addEventListener("mousedown", dropdownMouseDownHandler);
+  });
 
   return (
     <>
@@ -92,8 +100,9 @@ const NavBar = ({ isAdmin = false }) => {
             alt="A"
             onClick={(e) => {
               e.preventDefault();
-
-              setProfile(!profile);
+              if (!profile) {
+                setProfile(true);
+              }
             }}
           />
         </div>
@@ -101,13 +110,14 @@ const NavBar = ({ isAdmin = false }) => {
 
       {/* for smaller screen */}
       {menuON && windowSize.windowWidth < 900 && (
-        <div className="dropdown">
+        <div className="dropdown" ref={dropdownRef}>
           <div className="cart">
             <div
               onClick={(e) => {
                 e.preventDefault();
 
                 setCartOpen(!cartOpen);
+                setMenuON(false);
               }}
               className="cart-l"
             >
@@ -131,13 +141,13 @@ const NavBar = ({ isAdmin = false }) => {
           <Link className="nav-right-item" to="/">
             Home
           </Link>
-          <Link className="nav-right-item" to="/menu">
+          <Link className="nav-right-item" to="/">
             Menu
           </Link>
-          <Link className="nav-right-item" to="/services">
+          <Link className="nav-right-item" to="/">
             Services
           </Link>
-          <Link className="nav-right-item" to="about">
+          <Link className="nav-right-item" to="/about">
             About Us
           </Link>
         </div>
@@ -145,7 +155,7 @@ const NavBar = ({ isAdmin = false }) => {
 
       {/* for bigger screen */}
       {profile && windowSize.windowWidth > 900 && (
-        <AvatarMenu isAdmin={isAdmin} />
+        <AvatarMenu setProfile={setProfile} isAdmin={isAdmin} />
       )}
 
       {cartOpen && <Cart setCartOpen={setCartOpen} />}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "../../styles/cart.scss";
 import WestOutlinedIcon from "@mui/icons-material/WestOutlined";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
@@ -7,11 +7,11 @@ import { useDispatch, useSelector } from "react-redux";
 import CartItem from "./CartItem";
 import { updateUserDataInDb } from "../../actions/customerActions";
 import { useNavigate } from "react-router-dom";
-import { currentTimeGenerator } from "../../utils/dayjs";
 
 const Cart = ({ setCartOpen }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const cartRef = useRef();
 
   const currentUserData = useSelector(
     (state) => state.userReducer.currentUserData
@@ -29,40 +29,27 @@ const Cart = ({ setCartOpen }) => {
     }
   }, [currentUserData]);
 
-  const orderPlaceHandler = () => {
-    let userDataCopy = JSON.parse(JSON.stringify(currentUserData));
+  useEffect(() => {
+    const cartMouseDownEvenHandler = (e) => {
+      // console.log("e.target: ", e.target);
+      // console.log("cartRef.current: ", cartRef.current);
 
-    let subtotal = 0;
-    currentUserData.cart.forEach((it) => {
-      subtotal += Number(it.totalPrice);
-    });
+      if (cartRef.current) {
+        if (!cartRef.current.contains(e.target)) {
+          setCartOpen(false);
+        }
+      }
+    };
 
-    userDataCopy.orders.push({
-      orderTime: currentTimeGenerator(),
-      orderItems: [...currentUserData.cart],
-      subtotal: Number(subtotal),
-    });
-
-    userDataCopy.cart = [];
-
-    dispatch({
-      type: "PLACE_ORDER",
-      payload: userDataCopy,
-    });
-
-    dispatch(updateUserDataInDb(currentUserData, userDataCopy));
-
-    navigate("/order-placed");
-
-    setCartOpen(false);
-  };
+    document.addEventListener("mousedown", cartMouseDownEvenHandler);
+  });
 
   const [cartItems, setCartItems] = useState([]);
   const [subtotal, setSubtotal] = useState(0.0);
   return (
     <>
       {/* {console.log("cartItems: ", cartItems)} */}
-      <div className="cart-container">
+      <div className="cart-container" ref={cartRef}>
         <div className="cart-header">
           <WestOutlinedIcon
             onClick={(ev) => {
@@ -120,7 +107,13 @@ const Cart = ({ setCartOpen }) => {
                   <span>Subtotal:</span>
                   <span>Rs. {subtotal}</span>
                 </div>
-                <button className="btn" onClick={orderPlaceHandler}>
+                <button
+                  className="btn"
+                  onClick={(e) => {
+                    navigate("/place-order");
+                    setCartOpen(false);
+                  }}
+                >
                   Place Order
                 </button>
               </div>

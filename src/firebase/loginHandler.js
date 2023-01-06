@@ -6,6 +6,7 @@ import {
   signInWithPopup,
   sendPasswordResetEmail,
 } from "firebase/auth";
+import { toast } from "react-toastify";
 import { firebaseApp } from "./firebase";
 
 export const auth = getAuth(firebaseApp);
@@ -36,12 +37,18 @@ export const emailLoginHandler = (email, psk) => {
 
       console.log("errorCode: ", errorCode);
       console.log("errorMessage: ", errorMessage);
+      toast.error(errorMessage, {
+        toastId: errorCode,
+      });
     });
 };
 
 export const resetPasswordHandler = (email) => {
   sendPasswordResetEmail(auth, email)
     .then(() => {
+      toast.success("Password reset mail sent", {
+        toastId: "psk-reset-success",
+      });
       console.log("Password reset mail sent");
     })
     .catch((err) => {
@@ -50,5 +57,8 @@ export const resetPasswordHandler = (email) => {
 
       console.log("errorCode: ", errorCode);
       console.log("errorMessage: ", errorMessage);
+      toast.error(errorMessage, {
+        toastId: errorCode,
+      });
     });
 };

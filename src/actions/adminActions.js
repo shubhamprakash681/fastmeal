@@ -1,13 +1,14 @@
 import { City } from "country-state-city";
 import {
-  addDoc,
   collection,
+  deleteDoc,
   doc,
   getDoc,
   getDocs,
   getFirestore,
   setDoc,
 } from "firebase/firestore";
+import { toast } from "react-toastify";
 
 // firestore
 import { firebaseApp } from "../firebase/firebase";
@@ -34,33 +35,87 @@ export const fetchAllCityList = (countryCode) => (dispatch) => {
   });
 };
 
-export const addFoodToDb = async (
-  title,
-  image,
-  calorieCount,
-  price,
-  selectedCategory,
-  selectedCity,
-  stock
-) => {
-  try {
-    await addDoc(collection(db, "foodItems"), {
-      title,
-      image,
-      calorieCount,
-      price,
-      selectedCategory,
-      selectedCity,
-      stock,
-      timeStamp: currentTimeGenerator(),
-    });
+export const addFoodToDb =
+  (
+    title,
+    image,
+    calorieCount,
+    price,
+    selectedCategory,
+    selectedCity,
+    isUpdating = false
+  ) =>
+  async (dispatch) => {
+    const foodItemsRef = collection(db, "foodItems");
+    try {
+      const time = currentTimeGenerator();
+      await setDoc(doc(foodItemsRef, image.asset_id), {
+        title,
+        image,
+        calorieCount,
+        price,
+        selectedCategory,
+        selectedCity,
+        timeStamp: time,
+      });
 
-    console.log("Food item added to db successfully");
-  } catch (err) {
-    console.log(err);
-    alert(err);
-  }
-};
+      dispatch({
+        type: "ADD_FOOD",
+        payload: [
+          {
+            title,
+            image,
+            calorieCount,
+            price,
+            selectedCategory,
+            selectedCity,
+            timeStamp: time,
+          },
+          isUpdating,
+        ],
+      });
+
+      console.log("Food item added to db successfully");
+      toast.success("Food item added to db successfully", {
+        toastId: "food-added",
+      });
+    } catch (err) {
+      console.log(err);
+      // alert(err);
+      toast.error(err, {
+        toastId: "food-add-failed",
+      });
+    }
+  };
+export const deleteFoodInDb =
+  (foodDocUID, currAllProduts) => async (dispatch) => {
+    console.log("called, foodDocUID: ", foodDocUID);
+
+    try {
+      await deleteDoc(doc(db, "foodItems", foodDocUID));
+
+      let ls = [];
+      currAllProduts.forEach((product) => {
+        if (product.image.asset_id !== foodDocUID) {
+          ls.push(product);
+        }
+      });
+
+      dispatch({
+        type: "FETCH_ALL_PRODUCTS",
+        payload: ls,
+      });
+
+      toast.success("Food Item Deleted Successfully", {
+        toastId: "food-del-passed",
+      });
+    } catch (err) {
+      console.log(err);
+      toast.error(err, {
+        toastId: "food-del-failed",
+      });
+    }
+  };
 
 export const fetchAllUsersDataFromDb = () => async (dispatch) => {
   const collectionRef = collection(db, "users");
@@ -88,6 +143,7 @@ export const updateUserDataInDb_Admin =
       try {
         await setDoc(doc(usersRef, currUser.uid), updatedUser);
         console.log("USER MODIFIED SUCCESSFULY");
+        toast.success("Success");
 
         let ls = [];
         allUser.forEach((user) => {
@@ -104,8 +160,14 @@ export const updateUserDataInDb_Admin =
         });
       } catch (err) {
         console.log(err);
+        toast.error(err, {
+          toastId: "user-update-err",
+        });
       }
     } else {
       console.log(`No user with UID: ${currUser.uid} exists`);
+      toast.warn(`No user with UID: ${currUser.uid} exists`, {
+        toastId: "user-not-found",
+      });
     }
   };

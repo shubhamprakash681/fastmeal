@@ -13,7 +13,10 @@
 }
 
 .order-det {
-  height: 500px;
+  max-height: 500px;
+  border: 1px solid $secondary-color;
+  overflow-y: auto;
+  border-radius: 7px;
   > h3 {
     padding: 5px 0;
   }
@@ -21,8 +24,6 @@
 .order-det-ord {
   height: 94%;
   background-color: white;
-  border: 1px solid $secondary-color;
-  border-radius: 7px;
 }
 
 .rec-msg {
