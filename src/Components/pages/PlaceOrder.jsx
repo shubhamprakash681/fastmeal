@@ -60,7 +60,7 @@ const PlaceOrder = () => {
         }
       }
       userDataCopy.cart = [];
-      console.log("Modified User data copy: ", userDataCopy);
+      // console.log("Modified User data copy: ", userDataCopy);
 
       dispatch({
         type: "PLACE_ORDER",
@@ -213,6 +213,7 @@ const PlaceOrder = () => {
                 <div className="prev-loc-chooser-cont">
                   <div>Select a location from the mentioned list: </div>
                   <select
+                    placeholder="Choose a location"
                     value={deliveryLocation ? deliveryLocation : ""}
                     className="prev-loc-cont"
                     onChange={(e) =>

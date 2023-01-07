@@ -35,5 +35,5 @@ TODO:
 #close modal on mousedown event [d]
 #App icon [d]
 #data collection
-# previous lecation selection while placing oreder not working [d]
+# previous location selection while placing oreder not working [d]
 #static banner customization [d]

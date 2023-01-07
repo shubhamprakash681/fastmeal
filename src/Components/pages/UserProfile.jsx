@@ -3,6 +3,7 @@ import PhoneInput from "react-phone-number-input";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import ReactSelect from "react-select";
+import { toast } from "react-toastify";
 import {
   fetchAllCityList_User,
   updateUserDataInDb,
@@ -92,6 +93,10 @@ const UserProfile = () => {
     // console.log("parsedObject: ", modData);
 
     dispatch(updateUserDataInDb(currentUserData, modData));
+
+    toast.success("Profile Updated", {
+      toastId: "profile-upd-success",
+    });
   };
 
   useEffect(() => {
