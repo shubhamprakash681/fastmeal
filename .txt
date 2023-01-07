@@ -32,6 +32,8 @@ image, title, category, price, calCount, addedon
 TODO:
 # delivery address [d]
 #edit & delete on AllItems page [d]
-#close modal on mousedown event
+#close modal on mousedown event [d]
 #App icon [d]
 #data collection
+# previous lecation selection while placing oreder not working [d]
+#static banner customization [d]

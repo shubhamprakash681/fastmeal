@@ -68,22 +68,10 @@
   margin: 12px 0;
 }
 .prev-loc-cont {
-  padding: 0 7px;
-  list-style: none;
-  height: 200px;
-  overflow-y: auto;
+  padding: 7px;
   border: 1px solid $secondary-color;
   border-radius: 4px;
   background-color: white;
-  > li {
-    background-color: $bgn-color;
-    padding: 12px;
-    border: 1px solid $secondary-color;
-    border-radius: 4px;
-    cursor: pointer;
-    color: $secondary-color;
-    margin: 7px 0;
-  }
 }
 .prev-loc-chooser-cont {
   > input {

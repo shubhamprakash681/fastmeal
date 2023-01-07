@@ -27,7 +27,7 @@ const PlaceOrder = () => {
   const { coords, isGeolocationAvailable, isGeolocationEnabled } =
     useGeolocated({
       positionOptions: {
-        enableHighAccuracy: false,
+        enableHighAccuracy: true,
       },
       userDecisionTimeout: 5000,
     });
@@ -124,10 +124,6 @@ const PlaceOrder = () => {
     setAutoCompleteOptions(options);
   }, [autocompleteFeatures]);
 
-  useEffect(() => {
-    console.log(deliveryLocation);
-  }, [deliveryLocation]);
-
   return (
     <>
       <div className="place-order-container">
@@ -185,8 +181,8 @@ const PlaceOrder = () => {
                           }
                         );
                       } else {
-                        // console.log("lat: ", coords.latitude);
-                        // console.log("lon: ", coords.longitude);
+                        console.log("lat: ", coords.latitude);
+                        console.log("lon: ", coords.longitude);
                         getCurrentLocation(coords.latitude, coords.longitude)
                           .then((res) => {
                             // console.log("res: ", res);
@@ -215,24 +211,26 @@ const PlaceOrder = () => {
             {delLocationType === "prev-addr" && (
               <>
                 <div className="prev-loc-chooser-cont">
-                  <ul className="prev-loc-cont">
+                  <div>Select a location from the mentioned list: </div>
+                  <select
+                    value={deliveryLocation ? deliveryLocation : ""}
+                    className="prev-loc-cont"
+                    onChange={(e) =>
+                      setDeliveryLocation(JSON.parse(e.target.value))
+                    }
+                  >
                     {currentUserData.previousDeliveryLocations.map(
                       (loc, index) => {
-                        const locVal = loc.value;
                         return (
                           <>
-                            <li
-                              key={index}
-                              value={locVal}
-                              onClick={(e) => console.log(e.target.value)}
-                            >
+                            <option key={index} value={JSON.stringify(loc)}>
                               {loc.label}
-                            </li>
+                            </option>
                           </>
                         );
                       }
                     )}
-                  </ul>
+                  </select>
                 </div>
                 <div className="addressTypeSwapper">
                   <span onClick={() => setDelLocationType("address-box")}>
