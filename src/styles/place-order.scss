@@ -3,7 +3,7 @@
 .place-order-container {
   padding: 20px;
   width: 100vw;
-  height: calc(120vh - 86px);
+  // height: calc(120vh - 81px);
   box-sizing: border-box;
 
   display: flex;
@@ -72,6 +72,8 @@
   border: 1px solid $secondary-color;
   border-radius: 4px;
   background-color: white;
+  box-sizing: border-box;
+  width: 100%;
 }
 .prev-loc-chooser-cont {
   > input {

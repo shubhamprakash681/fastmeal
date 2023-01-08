@@ -4,7 +4,7 @@
   background-color: $main-bgn-col;
   box-sizing: border-box;
   width: 100%;
-  height: 100vh;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
 
@@ -39,6 +39,8 @@
     color: black;
   }
   > div > input {
+    box-sizing: border-box;
+    width: 100%;
     padding: 7px;
     font-size: larger;
     outline-color: $primary-color;

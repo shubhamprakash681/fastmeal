@@ -4,7 +4,7 @@
   padding: 30px;
   box-sizing: border-box;
   width: 100%;
-  height: calc(100vh - 86px);
+  height: calc(100dvh - 81px);
   background-color: white;
 
   display: flex;
@@ -91,5 +91,19 @@
   }
   .it-btn-cont {
     width: 108px;
+  }
+}
+
+@media screen and (max-width: 620px) {
+  // for smaller scfreens
+  .allitems-container {
+    height: calc(100dvh - 70px);
+  }
+}
+
+@media screen and (max-width: 350px) {
+  // for very small screen
+  .allitems-container {
+    height: calc(100dvh - 59px);
   }
 }
