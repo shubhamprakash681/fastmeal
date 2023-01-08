@@ -26,13 +26,13 @@
 @media screen and (max-width: 620px) {
   // for smaller scfreens
   .your-orders-container {
-    height: calc(100dvh - 70px);
+    height: calc(100vh - 70px);
   }
 }
 
 @media screen and (max-width: 350px) {
   // for very small screen
   .your-orders-container {
-    height: calc(100dvh - 59px);
+    height: calc(100vh - 59px);
   }
 }

@@ -4,7 +4,7 @@
   padding: 30px;
   box-sizing: border-box;
   width: 100%;
-  height: calc(100dvh - 81px);
+  height: calc(100vh - 81px);
   background-color: white;
 
   display: flex;
@@ -97,13 +97,13 @@
 @media screen and (max-width: 620px) {
   // for smaller scfreens
   .allitems-container {
-    height: calc(100dvh - 70px);
+    height: calc(100vh - 70px);
   }
 }
 
 @media screen and (max-width: 350px) {
   // for very small screen
   .allitems-container {
-    height: calc(100dvh - 59px);
+    height: calc(100vh - 59px);
   }
 }

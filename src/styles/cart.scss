@@ -6,7 +6,7 @@
   right: 0;
   z-index: 3;
   width: 500px;
-  height: calc(100dvh - 81px);
+  height: calc(100vh - 81px);
   box-sizing: border-box;
   background-color: white;
   box-shadow: -2px 0px 2px #88888888;
@@ -204,7 +204,7 @@
   // for smaller scfreens
   .cart-container {
     top: 70px;
-    height: calc(100dvh - 70px);
+    height: calc(100vh - 70px);
   }
 }
 
@@ -212,6 +212,6 @@
   // for very small screen
   .cart-container {
     top: 59px;
-    height: calc(100dvh - 59px);
+    height: calc(100vh - 59px);
   }
 }
