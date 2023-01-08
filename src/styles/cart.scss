@@ -162,7 +162,11 @@
 
   > span {
     min-width: 20px;
-    text-align: center;
+    height: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
     cursor: default;
     border: 1px solid $primary-color;
   }
