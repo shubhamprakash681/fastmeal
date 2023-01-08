@@ -28,7 +28,7 @@ const Banner = ({ orderNowOnClickHandler }) => {
             <span> Your City</span>
           </p>
 
-          <h2>Ask Me Anything Before Life, Health And Safety!</h2>
+          <h2>Ask Me Anything Before Life, Healthy And Safety!</h2>
 
           <button className="btn" onClick={orderNowOnClickHandler}>
             Order Now
