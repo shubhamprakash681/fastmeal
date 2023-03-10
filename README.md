@@ -1,5 +1,5 @@
 # To see the live demo of this project, click on the link below:-
-[InstaMe Live Demo](https://fastmeal-ce4ef.web.app/)
+[FastMeal Live Demo](https://fastmeal-ce4ef.web.app/)
 
 
 
